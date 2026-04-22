@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Modern Group | Real Estate & Investment | Jersey, UK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:     #0e1a2b;
+    --cream:   #f4efe6;
+    --warm:    #f9f5ee;
+    --gold:    #b8965a;
+    --gold-lt: #d4b07a;
+    --muted:   #6b7280;
+    --line:    rgba(14,26,43,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── TYPOGRAPHY ─────────────────────────────────── */
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant', serif;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ─── NAV ────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4vw;
+    height: 72px;
+    background: rgba(244,239,230,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow 0.3s;
+  }
+
+  nav.scrolled { box-shadow: 0 2px 24px rgba(14,26,43,0.08); }
+
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-decoration: none;
+  }
+  .nav-logo-top {
+    font-family: 'Cormorant', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .nav-logo-sub {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    opacity: 0.65;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    background: var(--ink);
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--ink);
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: transparent; color: var(--ink); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--ink);
+    transition: 0.3s;
+  }
+
+  /* ─── HERO ───────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8vw 5vw 8vw 8vw;
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 42ch;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.65s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    background: var(--ink);
+    padding: 1rem 2.2rem;
+    border: 1px solid var(--ink);
+    transition: background 0.25s, color 0.25s;
+  }
+  .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+
+  .btn-ghost {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 1rem 2.2rem;
+    border: 1px solid var(--line);
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-stat-num {
+    font-family: 'Cormorant', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.4s forwards;
+  }
+
+  .hero-img-wrap {
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+  }
+
+  .hero-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.88;
+    transform: scale(1.05);
+    animation: imgReveal 1.6s 0.4s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+  }
+
+  .hero-img-caption {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    text-align: right;
+  }
+  .hero-img-caption .label { color: rgba(244,239,230,0.6); }
+  .hero-img-caption p {
+    font-family: 'Cormorant', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(244,239,230,0.9);
+    margin-top: 4px;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 0.8s 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s 1.5s infinite;
+  }
+
+  /* ─── SECTION SHELLS ─────────────────────────────── */
+  section { padding: 8rem 8vw; }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+  .section-header h2 {
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    font-weight: 300;
+  }
+  .section-header p {
+    color: var(--muted);
+    font-size: 0.97rem;
+    line-height: 1.8;
+    max-width: 48ch;
+  }
+
+  /* ─── ABOUT ──────────────────────────────────────── */
+  #about { background: var(--warm); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-img-block {
+    position: relative;
+  }
+  .about-img-block img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    display: block;
+  }
+  .about-img-accent {
+    position: absolute;
+    top: -1.5rem;
+    left: -1.5rem;
+    width: 60%;
+    height: 60%;
+    border: 1px solid var(--gold);
+    z-index: -1;
+  }
+  .about-img-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1.5rem;
+    text-align: center;
+    min-width: 120px;
+  }
+  .about-img-badge .num {
+    font-family: 'Cormorant', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1;
+    display: block;
+  }
+  .about-img-badge .sub {
+    font-size: 0.58rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .about-content { }
+  .about-content h2 {
+    font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+    font-weight: 300;
+    margin: 1rem 0 1.5rem;
+  }
+  .about-content p {
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.85;
+  }
+  .about-timeline {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+  }
+  .timeline-item {
+    flex: 1;
+    padding-top: 1rem;
+    border-top: 2px solid var(--line);
+  }
+  .timeline-item.active { border-top-color: var(--gold); }
+  .timeline-year {
+    font-family: 'Cormorant', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .timeline-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  /* ─── FOCUS ──────────────────────────────────────── */
+  #focus { background: var(--ink); }
+  #focus .label { color: var(--gold); }
+  #focus .section-header h2 { color: var(--cream); }
+  #focus .section-header p { color: rgba(244,239,230,0.55); }
+
+  .focus-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .focus-card {
+    background: rgba(255,255,255,0.04);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .focus-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .focus-card:hover { background: rgba(255,255,255,0.07); }
+  .focus-card:hover::after { transform: scaleX(1); }
+
+  .focus-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .focus-card h3 {
+    font-family: 'Cormorant', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--cream);
+  }
+  .focus-card p {
+    font-size: 0.88rem;
+    color: rgba(244,239,230,0.55);
+    line-height: 1.75;
+    flex: 1;
+  }
+  .focus-card-num {
+    font-family: 'Cormorant', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    line-height: 1;
+  }
+
+  /* ─── PROPERTY PORTFOLIO ─────────────────────────── */
+  #properties { background: var(--cream); }
+
+  .portfolio-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .ptab {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 1.4rem 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--warm);
+    cursor: pointer;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    text-align: left;
+    position: relative;
+  }
+  .ptab:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .ptab:hover .ptab-count { background: var(--gold); color: #fff; }
+  .ptab.active {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .ptab.active .ptab-count { background: var(--gold); color: #fff; }
+
+  .ptab-label { flex: 1; }
+  .ptab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(14,26,43,0.1);
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 7px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .ptab.active .ptab-count { background: var(--gold); color: #fff; }
+
+  .portfolio-panel { display: none; }
+  .portfolio-panel.active { display: block; }
+
+  .portfolio-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+  }
+
+  .plist-item {
+    background: var(--cream);
+    padding: 1.6rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+  .plist-item::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.3s;
+  }
+  .plist-item:hover { background: var(--warm); }
+  .plist-item:hover::after { transform: scaleY(1); }
+
+  .plist-num {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+  .plist-name {
+    font-family: 'Cormorant', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .plist-loc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .portfolio-summary {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .portfolio-summary-item { }
+  .portfolio-summary-item .num {
+    font-family: 'Cormorant', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .portfolio-summary-item .lbl {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* ─── INVESTMENT ARM ─────────────────────────────── */
+  #investment { background: var(--warm); }
+
+  .inv-grid {
+    display: grid;
+    grid-template-columns: 55% 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .inv-content h2 {
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.15;
+  }
+  .inv-content p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    max-width: 52ch;
+    margin-bottom: 1.2rem;
+  }
+
+  .inv-sectors {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .inv-sector {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .inv-sector:last-child { border-bottom: 1px solid var(--line); }
+  .inv-sector-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .inv-sector-name {
+    font-family: 'Cormorant', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+  }
+  .inv-sector-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .inv-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .inv-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 2rem;
+  }
+  .inv-card .num {
+    font-family: 'Cormorant', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--gold);
+  }
+  .inv-card .desc {
+    font-size: 0.78rem;
+    color: rgba(244,239,230,0.55);
+    margin-top: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+  .inv-card-quote {
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 2rem;
+  }
+  .inv-card-quote blockquote {
+    font-family: 'Cormorant', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .inv-card-quote cite {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 1rem;
+  }
+
+  /* ─── CONTACT ────────────────────────────────────── */
+  #contact {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding: 8rem 8vw;
+  }
+
+  .contact-left { }
+  .contact-left h2 {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem;
+  }
+  .contact-left p {
+    font-size: 0.92rem;
+    color: rgba(244,239,230,0.55);
+    line-height: 1.8;
+    max-width: 42ch;
+    margin-bottom: 3rem;
+  }
+
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-detail { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .contact-detail-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(184,150,90,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: var(--gold);
+  }
+  .contact-detail-text .dl { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
+  .contact-detail-text .dv { font-size: 0.92rem; color: var(--cream); margin-top: 2px; }
+  .contact-detail-text a { color: var(--cream); text-decoration: none; }
+  .contact-detail-text a:hover { color: var(--gold); }
+
+  .contact-right { }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.45);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--cream);
+    padding: 0.85rem 1rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(244,239,230,0.25); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-group select option { background: var(--ink); }
+
+  .form-submit {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    border: none;
+    padding: 1.1rem 2.5rem;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+  .form-note {
+    font-size: 0.72rem;
+    color: rgba(244,239,230,0.3);
+    margin-top: -0.3rem;
+  }
+
+  /* ─── FOOTER ─────────────────────────────────────── */
+  footer {
+    background: #07111e;
+    padding: 2.5rem 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-logo {
+    font-family: 'Cormorant', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+  }
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(244,239,230,0.3);
+    letter-spacing: 0.04em;
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(244,239,230,0.35);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── ANIMATIONS ─────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes imgReveal {
+    from { transform: scale(1.12); }
+    to   { transform: scale(1.0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.3); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────────── */
+  .gold-line {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  /* ─── MOBILE ─────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 5rem 6vw 4rem; }
+    .hero-right { height: 55vw; }
+
+    .section-header { grid-template-columns: 1fr; gap: 1rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-img-block { display: none; }
+    .focus-cards { grid-template-columns: 1fr; }
+    .portfolio-list { grid-template-columns: 1fr 1fr; }
+    .portfolio-tabs { grid-template-columns: 1fr; gap: 0.5rem; }
+    .inv-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .inv-aside { flex-direction: row; flex-wrap: wrap; }
+    .inv-aside > * { flex: 1 1 200px; }
+    #contact { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 6vw; }
+    .form-row { grid-template-columns: 1fr; }
+    section { padding: 5rem 6vw; }
+    footer { flex-direction: column; text-align: center; }
+
+    .hero-scroll { display: none; }
+  }
+
+  @media (max-width: 560px) {
+    .portfolio-list { grid-template-columns: 1fr; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  /* ─── MOBILE MENU ─────────────────────────────────── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0; bottom: 0;
+    background: var(--ink);
+    z-index: 99;
+    padding: 3rem 6vw;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding-bottom: 1.5rem;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-top">The Modern Group</span>
+    <span class="nav-logo-sub">Est. 1967 · Jersey, UK</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#focus">Focus</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#focus" onclick="closeMobile()">Focus</a>
+  <a href="#properties" onclick="closeMobile()">Properties</a>
+  <a href="#investment" onclick="closeMobile()">Investment</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="label">Real Estate &amp; Investment</span>
+    </div>
+    <h1>Capital that<br><em>builds</em> legacies.</h1>
+    <p class="hero-desc">
+      A Jersey-based property and investment group with a portfolio spanning residential, commercial, and retail — and a strategic eye on high-growth sectors.
+    </p>
+    <div class="hero-actions">
+      <a href="#properties" class="btn-primary">View Portfolio</a>
+      <a href="#about" class="btn-ghost">Our Story</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">57+</div>
+        <div class="hero-stat-label">Years of Operation</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Asset Classes</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">Jersey</div>
+        <div class="hero-stat-label">Channel Islands, UK</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <!-- Unsplash: modern building exterior -->
+      <img src="castle.png" alt="View over Elizabeth Castle, Jersey" loading="eager">
+    </div>
+    <div class="hero-img-caption">
+      <span class="label">Elizabeth Castle</span>
+      <p>St. Helier, Jersey</p>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-block reveal">
+      <div class="about-img-accent"></div>
+      <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=800&q=80&auto=format&fit=crop" alt="Elegant period property">
+      <div class="about-img-badge">
+        <span class="num">1967</span>
+        <span class="sub">Founded</span>
+      </div>
+    </div>
+    <div class="about-content reveal">
+      <span class="label">Our Story</span>
+      <span class="gold-line" style="margin-top:0.8rem"></span>
+      <h2>From Jersey's<br>hospitality to its<br>skyline.</h2>
+      <p>The Modern Group has been a trusted name in Jersey since 1967. We began as the island's foremost hospitality operator — running hotels, restaurants, bars, and entertainment venues across Jersey and the United Kingdom for over five decades.</p>
+      <p>In 2021, we undertook a deliberate strategic transformation, deploying the capital and expertise built through decades of operations into real estate and investments — sectors we believe offer long-term, resilient returns.</p>
+      <p>Today we own, operate, and manage a growing portfolio of residential, commercial, and retail assets, alongside a select investment programme in innovative private companies.</p>
+      <div class="about-timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1967</div>
+          <div class="timeline-desc">Founded as a hospitality enterprise in Jersey, CI</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-desc">Strategic pivot into real estate &amp; investments</div>
+        </div>
+        <div class="timeline-item active">
+          <div class="timeline-year">Now</div>
+          <div class="timeline-desc">Diversified property group with investment arm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT FOCUS -->
+<section id="focus">
+  <div class="section-header reveal">
+    <div>
+      <span class="label">What We Do</span>
+      <span class="gold-line" style="margin-top:0.8rem"></span>
+      <h2 style="color:var(--cream)">Three pillars.<br>One strategy.</h2>
+    </div>
+    <p>We pursue capital-efficient, long-duration opportunities across complementary asset types — balancing income stability with value-creation potential.</p>
+  </div>
+  <div class="focus-cards reveal">
+    <div class="focus-card">
+      <div class="focus-card-num">01</div>
+      <div class="focus-icon">🏢</div>
+      <h3>Commercial &amp; Retail</h3>
+      <p>Office buildings and retail properties in established locations, structured to generate stable, long-term income with strong covenant quality.</p>
+    </div>
+    <div class="focus-card">
+      <div class="focus-card-num">02</div>
+      <div class="focus-icon">🏠</div>
+      <h3>Residential</h3>
+      <p>Apartments and homes across Jersey, acquired for long-hold rental income and selective redevelopment, with a focus on well-connected locations.</p>
+    </div>
+    <div class="focus-card">
+      <div class="focus-card-num">03</div>
+      <div class="focus-icon">📈</div>
+      <h3>Private Investment</h3>
+      <p>Minority silent partnerships in growth-stage companies across Life Sciences, Hospitality, and Technology — sectors we understand deeply.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROPERTIES -->
+<section id="properties">
+  <div class="section-header reveal">
+    <div>
+      <span class="label">Property Portfolio</span>
+      <span class="gold-line" style="margin-top:0.8rem"></span>
+      <h2>Our portfolio<br>across Jersey &amp; the UK.</h2>
+    </div>
+    <p>25 properties across residential, commercial, and retail — predominantly in Jersey, with a growing presence in mainland UK locations including Bristol, Gloucester, Stroud, Norwich, and Cromer.</p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="portfolio-tabs reveal" role="tablist">
+    <button class="ptab active" onclick="switchTab('residential', this)" role="tab">
+      <span class="ptab-label">Residential</span><span class="ptab-count">8</span>
+    </button>
+    <button class="ptab" onclick="switchTab('commercial', this)" role="tab">
+      <span class="ptab-label">Commercial</span><span class="ptab-count">12</span>
+    </button>
+    <button class="ptab" onclick="switchTab('retail', this)" role="tab">
+      <span class="ptab-label">Retail &amp; Restaurants</span><span class="ptab-count">5</span>
+    </button>
+  </div>
+
+  <!-- Residential -->
+  <div class="portfolio-panel active reveal" id="panel-residential">
+    <div class="portfolio-list">
+      <div class="plist-item"><div class="plist-num">01</div><div class="plist-name">Cavendish House</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">02</div><div class="plist-name">Elesmere Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">03</div><div class="plist-name">Granary Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">04</div><div class="plist-name">The Villa Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">05</div><div class="plist-name">Roncelle Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">06</div><div class="plist-name">The Customs Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">07</div><div class="plist-name">Maison Chaucey</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">08</div><div class="plist-name">Bute Cottage</div><div class="plist-loc">Jersey, UK</div></div>
+    </div>
+    <div class="portfolio-summary">
+      <div class="portfolio-summary-item"><div class="num">8</div><div class="lbl">Properties</div></div>
+      <div class="portfolio-summary-item"><div class="num">Jersey</div><div class="lbl">Primary Location</div></div>
+      <div class="portfolio-summary-item"><div class="num">Apts &amp; Homes</div><div class="lbl">Asset Type</div></div>
+    </div>
+  </div>
+
+  <!-- Commercial -->
+  <div class="portfolio-panel" id="panel-commercial">
+    <div class="portfolio-list">
+      <div class="plist-item"><div class="plist-num">01</div><div class="plist-name">7 The Esplanade</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">02</div><div class="plist-name">3 Mulcaster Street</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">03</div><div class="plist-name">8 Vine Street</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">04</div><div class="plist-name">Roseville Street Properties</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">05</div><div class="plist-name">Saco Apartments</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">06</div><div class="plist-name">1–3–5 Castle Street</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">07</div><div class="plist-name">Don Bridge Industrial Park</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">08</div><div class="plist-name">Merrywalks</div><div class="plist-loc">Stroud, UK</div></div>
+      <div class="plist-item"><div class="plist-num">09</div><div class="plist-name">Friary House</div><div class="plist-loc">Gloucester, UK</div></div>
+      <div class="plist-item"><div class="plist-num">10</div><div class="plist-name">Middlebrook</div><div class="plist-loc">Cromer, UK</div></div>
+      <div class="plist-item"><div class="plist-num">11</div><div class="plist-name">South Liberty Lane</div><div class="plist-loc">Bristol, UK</div></div>
+      <div class="plist-item"><div class="plist-num">12</div><div class="plist-name">Popular Farm</div><div class="plist-loc">Norwich, UK</div></div>
+    </div>
+    <div class="portfolio-summary">
+      <div class="portfolio-summary-item"><div class="num">12</div><div class="lbl">Properties</div></div>
+      <div class="portfolio-summary-item"><div class="num">6</div><div class="lbl">UK Locations</div></div>
+      <div class="portfolio-summary-item"><div class="num">Office &amp; Industrial</div><div class="lbl">Asset Types</div></div>
+    </div>
+  </div>
+
+  <!-- Retail & Restaurants -->
+  <div class="portfolio-panel" id="panel-retail">
+    <div class="portfolio-list">
+      <div class="plist-item"><div class="plist-num">01</div><div class="plist-name">Jaipur Restaurant</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">02</div><div class="plist-name">Nelsons Eye</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">03</div><div class="plist-name">Accessorize</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">04</div><div class="plist-name">Tru Cafe</div><div class="plist-loc">Jersey, UK</div></div>
+      <div class="plist-item"><div class="plist-num">05</div><div class="plist-name">Waves</div><div class="plist-loc">Jersey, UK</div></div>
+    </div>
+    <div class="portfolio-summary">
+      <div class="portfolio-summary-item"><div class="num">5</div><div class="lbl">Properties</div></div>
+      <div class="portfolio-summary-item"><div class="num">Jersey</div><div class="lbl">Primary Location</div></div>
+      <div class="portfolio-summary-item"><div class="num">F&amp;B &amp; Retail</div><div class="lbl">Asset Types</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT ARM -->
+<section id="investment">
+  <div class="inv-grid">
+    <div class="inv-content reveal">
+      <span class="label">Investment Arm</span>
+      <span class="gold-line" style="margin-top:0.8rem"></span>
+      <h2>Patient capital.<br>Strategic partnerships.</h2>
+      <p>Alongside our property activities, The Modern Group takes minority, silent positions in innovative companies — bringing long-term capital and operational experience without interfering in day-to-day management.</p>
+      <p>We focus on sectors where we have genuine understanding: Hospitality, Life Sciences, and Technology. We look for founder-led businesses with clear differentiation and a credible growth path.</p>
+      <div class="inv-sectors">
+        <div class="inv-sector">
+          <div class="inv-sector-dot"></div>
+          <div class="inv-sector-name">Life Sciences</div>
+          <div class="inv-sector-desc">Healthcare &amp; biotech</div>
+        </div>
+        <div class="inv-sector">
+          <div class="inv-sector-dot"></div>
+          <div class="inv-sector-name">Hospitality</div>
+          <div class="inv-sector-desc">F&amp;B, hotels &amp; leisure</div>
+        </div>
+        <div class="inv-sector">
+          <div class="inv-sector-dot"></div>
+          <div class="inv-sector-name">Technology</div>
+          <div class="inv-sector-desc">Software &amp; digital platforms</div>
+        </div>
+      </div>
+    </div>
+    <div class="inv-aside reveal">
+      <div class="inv-card">
+        <div class="num">Minority</div>
+        <div class="desc">Silent partnership positions — capital without interference</div>
+      </div>
+      <div class="inv-card">
+        <div class="num">3</div>
+        <div class="desc">Target sectors: Life Sciences, Hospitality, Technology</div>
+      </div>
+      <div class="inv-card-quote">
+        <blockquote>"We invest in people as much as businesses — backing founders who know their market and have the conviction to build for the long term."</blockquote>
+        <cite>The Modern Group</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:8rem 8vw; background:var(--ink); display:grid; grid-template-columns:1fr 1fr; gap:6rem;">
+  <div class="contact-left reveal">
+    <span class="label">Get in Touch</span>
+    <span class="gold-line" style="margin-top:0.8rem"></span>
+    <h2>Let's talk about what<br>you're looking for.</h2>
+    <p>Whether you're interested in exploring a property opportunity, discussing an investment, or simply learning more about The Modern Group, we'd be glad to hear from you.</p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <div class="dl">Phone</div>
+          <div class="dv"><a href="tel:+441534871988">+44 1534 871988</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉</div>
+        <div class="contact-detail-text">
+          <div class="dl">Email</div>
+          <div class="dv"><a href="mailto:info@themoderngroup.com">info@themoderngroup.com</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <div class="dl">Address</div>
+          <div class="dv">16 La Chasse, St. Helier<br>Jersey, JE1 4HE, United Kingdom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-right reveal">
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jonathan">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>Enquiry Type</label>
+        <select>
+          <option value="">Select a topic…</option>
+          <option>Property Opportunity</option>
+          <option>Investment Discussion</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us what you have in mind…"></textarea>
+      </div>
+      <button class="form-submit" type="button" onclick="handleSubmit(this)">Send Enquiry</button>
+      <p class="form-note">We respond to all enquiries within 1–2 business days.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The Modern Group</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#properties">Properties</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 The Modern Group. Jersey, Channel Islands.</div>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Portfolio tab switching
+  function switchTab(id, btn) {
+    document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.portfolio-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('panel-' + id);
+    panel.classList.add('active');
+    // re-trigger reveal animation
+    panel.classList.remove('visible');
+    setTimeout(() => panel.classList.add('visible'), 10);
+  }
+
+
+  function handleSubmit(btn) {
+    btn.textContent = '✓ Sent';
+    btn.style.background = '#4caf50';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send Enquiry';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }
+</script>
+</body>
+</html>
