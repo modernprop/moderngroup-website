@@ -911,35 +911,109 @@
     margin-bottom: 1.2rem;
   }
 
-  /* ─── MOBILE ─────────────────────────────────────── */
+  /* ─── TABLET (max 900px) ─────────────────────────── */
   @media (max-width: 900px) {
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
 
+    /* Hero - stack vertically */
     .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 5rem 6vw 4rem; }
-    .hero-right { height: 55vw; }
+    .hero-left { padding: 4rem 6vw 2.5rem; }
+    .hero-right {
+      height: 60vw;
+      padding: 1.2rem 6vw;
+      margin-top: 0;
+    }
+    .hero-img-wrap { padding: 0; }
 
+    /* Sections */
+    section { padding: 4rem 6vw; }
     .section-header { grid-template-columns: 1fr; gap: 1rem; }
-    .about-grid { grid-template-columns: 1fr; }
-    .about-img-block { display: none; }
-    .focus-cards { grid-template-columns: 1fr; }
-    .portfolio-list { grid-template-columns: 1fr 1fr; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-img-block { display: block; }
+    .about-timeline { gap: 1rem; }
+
+    /* Focus */
+    .focus-cards { grid-template-columns: 1fr 1fr; }
+
+    /* Portfolio */
     .portfolio-tabs { grid-template-columns: 1fr; gap: 0.5rem; }
-    .inv-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .portfolio-list { grid-template-columns: 1fr 1fr; }
+
+    /* Investment */
+    .inv-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .inv-aside { flex-direction: row; flex-wrap: wrap; }
     .inv-aside > * { flex: 1 1 200px; }
-    #contact { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 6vw; }
-    .form-row { grid-template-columns: 1fr; }
-    section { padding: 5rem 6vw; }
-    footer { flex-direction: column; text-align: center; }
+
+    /* Contact */
+    #contact { grid-template-columns: 1fr !important; gap: 3rem; padding: 4rem 6vw !important; }
+    .form-row { grid-template-columns: 1fr 1fr; }
+
+    /* Footer */
+    footer { flex-direction: column; text-align: center; gap: 1.2rem; }
+    .footer-links { justify-content: center; }
 
     .hero-scroll { display: none; }
   }
 
+  /* ─── MOBILE (max 560px) ─────────────────────────── */
   @media (max-width: 560px) {
+
+    /* Nav */
+    nav { padding: 0 5vw; height: 64px; }
+
+    /* Hero */
+    .hero-left { padding: 3rem 5vw 2rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero-desc { font-size: 0.9rem; }
+    .hero-actions { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 0.9rem 1.5rem; }
+    .hero-stats { gap: 1.2rem; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1.2rem; }
+    .hero-stat-num { font-size: 1.6rem; }
+    .hero-right { height: 55vw; padding: 0.8rem 5vw; }
+
+    /* Sections */
+    section { padding: 3.5rem 5vw; }
+    .section-header h2 { font-size: 2rem; }
+
+    /* About */
+    .about-content h2 { font-size: 2rem; }
+    .about-timeline { flex-direction: column; gap: 0; }
+    .timeline-item { padding: 0.8rem 0; border-top: none; border-left: 2px solid var(--line); padding-left: 1rem; }
+    .timeline-item.active { border-left-color: var(--gold); }
+
+    /* About image badge */
+    .about-img-badge { min-width: 90px; padding: 1rem; bottom: -1rem; right: -0.5rem; }
+    .about-img-badge .num { font-size: 1.8rem; }
+
+    /* Focus */
+    .focus-cards { grid-template-columns: 1fr; }
+    .focus-card { padding: 2rem 1.5rem; }
+
+    /* Portfolio */
+    .portfolio-tabs { grid-template-columns: 1fr; }
+    .ptab { padding: 1.1rem 1.2rem; }
     .portfolio-list { grid-template-columns: 1fr; }
-    .hero-stats { gap: 1.5rem; }
+    .plist-item { padding: 1.2rem 1.4rem; }
+    .portfolio-summary { flex-wrap: wrap; gap: 1.2rem; }
+
+    /* Investment */
+    .inv-content h2 { font-size: 2rem; }
+    .inv-aside { flex-direction: column; }
+    .inv-card { padding: 1.5rem; }
+    .inv-card .num { font-size: 2.2rem; }
+
+    /* Contact */
+    #contact { padding: 3.5rem 5vw !important; }
+    .contact-left h2 { font-size: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-details { gap: 1.2rem; }
+
+    /* Footer */
+    footer { padding: 2rem 5vw; }
+    .footer-links { flex-wrap: wrap; gap: 1rem; justify-content: center; }
   }
 
   /* ─── MOBILE MENU ─────────────────────────────────── */
