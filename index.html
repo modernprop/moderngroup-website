@@ -343,13 +343,13 @@
   #about { background: var(--warm); }
 
   .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: row;
     gap: 4rem;
-    align-items: start;
+    align-items: flex-start;
   }
-
   .about-img-block {
+    flex: 0 0 48%;
     position: relative;
     background: #0e1628;
     padding: 2.7rem 0 0 0;
@@ -380,9 +380,11 @@
   .about-img-badge { display: none; }
 
   .about-content {
+    flex: 1 1 0;
     display: block;
     color: var(--ink);
     padding-top: 0.5rem;
+    min-width: 0;
   }
   .about-content h2 {
     font-size: clamp(2.2rem, 3.5vw, 3.4rem);
@@ -913,7 +915,8 @@
     .section-header { grid-template-columns: 1fr; gap: 1rem; }
 
     /* About */
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-grid { flex-direction: column; gap: 2rem; }
+    .about-img-block { flex: none; width: 100%; }
     .about-timeline { gap: 1rem; }
 
     /* Focus */
@@ -1068,12 +1071,12 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get in Touch</a>
-  <span class="nav-version-desktop">v1.5</span>
+  <span class="nav-version-desktop">v1.6</span>
   <div class="hamburger-wrap">
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <div class="nav-version">v1.5</div>
+    <div class="nav-version">v1.6</div>
   </div>
 </nav>
 
