@@ -366,7 +366,11 @@
   .about-img-accent { display: none; }
   .about-img-badge { display: none; }
 
-  .about-content { border-right: 3px solid var(--gold); }
+  .about-content {
+    max-width: 72ch;
+    border-right: 3px solid var(--gold);
+    padding-right: 1.5rem;
+  }
   .about-content h2 {
     font-size: clamp(2.2rem, 3.5vw, 3.4rem);
     font-weight: 300;
@@ -1084,12 +1088,12 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get in Touch</a>
-  <span class="nav-version-desktop">v2.6</span>
+  <span class="nav-version-desktop">v2.7</span>
   <div class="hamburger-wrap">
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <div class="nav-version">v2.6</div>
+    <div class="nav-version">v2.7</div>
   </div>
 </nav>
 
