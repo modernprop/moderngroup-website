@@ -351,19 +351,23 @@
 
   .about-img-block {
     position: relative;
+    background: #0e1628;
+    padding: 2.2rem 0;
   }
   .about-img-block img {
     width: 100%;
-    aspect-ratio: 4/5;
+    aspect-ratio: 16/9;
     object-fit: cover;
     display: block;
+    opacity: 0.92;
   }
+  .about-img-accent { display: none; }
   .about-img-accent {
     position: absolute;
-    top: -1.5rem;
-    left: -1.5rem;
-    width: 60%;
-    height: 60%;
+    top: -1rem;
+    left: -1rem;
+    width: 55%;
+    height: 55%;
     border: 1px solid var(--gold);
     z-index: -1;
   }
@@ -1109,7 +1113,7 @@
       <span class="gold-line" style="margin-top:0.8rem"></span>
       <h2>Our portfolio<br>across Jersey &amp; the UK.</h2>
     </div>
-    <p>25 properties across residential, commercial, and retail — predominantly in Jersey, with a growing presence in mainland UK locations including Bristol, Gloucester, Stroud, Norwich, and Cromer.</p>
+    <p>30 properties across residential, commercial, and retail — predominantly in Jersey, with a growing presence in mainland UK locations including Bristol, Gloucester, Stroud, Norwich, and Cromer.</p>
   </div>
 
   <!-- Tabs -->
@@ -1265,24 +1269,24 @@
     </div>
   </div>
   <div class="contact-right reveal">
-    <div class="contact-form">
+    <div class="contact-form" id="contactForm">
       <div class="form-row">
         <div class="form-group">
           <label>First Name</label>
-          <input type="text" placeholder="Jonathan">
+          <input type="text" id="f_first" name="first_name" placeholder="Jonathan">
         </div>
         <div class="form-group">
           <label>Last Name</label>
-          <input type="text" placeholder="Smith">
+          <input type="text" id="f_last" name="last_name" placeholder="Smith">
         </div>
       </div>
       <div class="form-group">
         <label>Email Address</label>
-        <input type="email" placeholder="you@example.com">
+        <input type="email" id="f_email" name="email" placeholder="you@example.com">
       </div>
       <div class="form-group">
         <label>Enquiry Type</label>
-        <select>
+        <select id="f_type" name="enquiry_type">
           <option value="">Select a topic…</option>
           <option>Property Opportunity</option>
           <option>Investment Discussion</option>
@@ -1291,10 +1295,10 @@
       </div>
       <div class="form-group">
         <label>Message</label>
-        <textarea placeholder="Tell us what you have in mind…"></textarea>
+        <textarea id="f_message" name="message" placeholder="Tell us what you have in mind…"></textarea>
       </div>
-      <button class="form-submit" type="button" onclick="handleSubmit(this)">Send Enquiry</button>
-      <p class="form-note">We respond to all enquiries within 1–2 business days.</p>
+      <button class="form-submit" type="button" id="submitBtn" onclick="submitForm()">Send Enquiry</button>
+      <p class="form-note" id="formNote">We respond to all enquiries within 1–2 business days.</p>
     </div>
   </div>
 </section>
@@ -1350,16 +1354,56 @@
     setTimeout(() => panel.classList.add('visible'), 10);
   }
 
+  // Contact form — Formspree
+  async function submitForm() {
+    const btn = document.getElementById('submitBtn');
+    const note = document.getElementById('formNote');
+    const email = document.getElementById('f_email').value.trim();
+    const message = document.getElementById('f_message').value.trim();
 
-  function handleSubmit(btn) {
-    btn.textContent = '✓ Sent';
-    btn.style.background = '#4caf50';
+    if (!email || !message) {
+      note.textContent = 'Please fill in your email and message.';
+      note.style.color = '#e07070';
+      return;
+    }
+
+    btn.textContent = 'Sending…';
     btn.disabled = true;
-    setTimeout(() => {
+
+    const data = {
+      first_name:   document.getElementById('f_first').value,
+      last_name:    document.getElementById('f_last').value,
+      email:        email,
+      enquiry_type: document.getElementById('f_type').value,
+      message:      message
+    };
+
+    try {
+      const res = await fetch('https://formspree.io/f/xqewgggr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        btn.textContent = '✓ Sent!';
+        btn.style.background = '#4caf50';
+        note.textContent = "Thank you — we'll be in touch within 1–2 business days.";
+        note.style.color = 'rgba(244,239,230,0.6)';
+        ['f_first','f_last','f_email','f_type','f_message'].forEach(id => {
+          document.getElementById(id).value = '';
+        });
+        setTimeout(() => {
+          btn.textContent = 'Send Enquiry';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 5000);
+      } else { throw new Error(); }
+    } catch(e) {
       btn.textContent = 'Send Enquiry';
-      btn.style.background = '';
       btn.disabled = false;
-    }, 3000);
+      note.textContent = 'Something went wrong — please email us directly.';
+      note.style.color = '#e07070';
+    }
   }
 </script>
 </body>
