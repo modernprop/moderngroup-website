@@ -958,6 +958,21 @@
 
     /* Focus */
     .focus-cards { grid-template-columns: 1fr; }
+    /* Mobile: move battle info box below timeline */
+    .about-img-block .battle-info-box { display: none; }
+    .battle-info-box-mobile {
+      display: block;
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: 1.5rem 1.5rem 1.5rem 1.25rem;
+      margin: 2rem 1.5rem 0;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .battle-info-box-mobile p { margin: 0; }
+
     .focus-card { padding: 2rem 1.5rem; }
 
     /* Portfolio */
@@ -1053,6 +1068,7 @@
     line-height: 1.5;
     margin: 0;
   }
+  .battle-info-box-mobile { display: none; }
   .battle-info-box {
     margin-top: 1.2rem;
     padding: 1.2rem 1.5rem;
@@ -1085,12 +1101,12 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Get in Touch</a>
-  <span class="nav-version-desktop">v3.6</span>
+  <span class="nav-version-desktop">v3.7</span>
   <div class="hamburger-wrap">
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <div class="nav-version">v3.6</div>
+    <div class="nav-version">v3.7</div>
   </div>
 </nav>
 
@@ -1174,6 +1190,9 @@
       <div class="timeline-year">Now</div>
       <div class="timeline-desc">Diversified property group with investment arm</div>
     </div>
+  </div>
+  <div class="battle-info-box-mobile reveal">
+    <p>The Battle of Jersey, fought on January 6, 1781, was a very short engagement, with the main combat and final British victory lasting only about 15 minutes. While French troops arrived in St Helier in the early morning, the direct confrontation was swift once British forces led by Major Francis Peirson organized, ending within a quarter of an hour.</p>
   </div>
 </section>
 
